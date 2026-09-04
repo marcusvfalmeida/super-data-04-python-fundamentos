@@ -252,7 +252,7 @@ class Calculadora:
         return multiplicacao
 
     def dividir(self) -> float:
-        divisao: self.n1/self.n2
+        divisao: self.n1 / self.n2
         return self.dividir
 
 def exemplo_calculadora():
