@@ -110,18 +110,20 @@ class Veiculos:
         self.velocidade_inicial = 0
 
     def acelerar(self, valor: int):
-        self.velocidade = 50
-        self.nova_velocidade_acelerada = self.velocidade + valor
+        #self.velocidade = 50
+        #self.nova_velocidade_acelerada = self.velocidade + valor
+        self.velocidade = self.velocidade_inicial + valor
 
-        print("Acelerou: ", self.nova_velocidade_acelerada)
+        print("Acelerou: ", self.velocidade)
 
     def frear(self, valor: int):
-        if valor > 30:
+        if valor > self.velocidade:
             return 0
         else:
-            self.velocidade = 30
-            self.nova_velocidade_freada = self.velocidade - valor
-            print("Freou: ", self.nova_velocidade_freada)
+            #self.velocidade = 30
+            #self.nova_velocidade_freada = self.velocidade - valor
+            self.velocidade = self.velocidade - valor
+            print("Freou: ", self.velocidade)
 
 class Carro(Veiculos):
     def __init__(self, marca: str, modelo: str, velocidade_inicial: int, quantidade_portas: int):
