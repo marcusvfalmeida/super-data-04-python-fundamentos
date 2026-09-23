@@ -56,7 +56,7 @@ def apagar_produto():
     print("Produto apagado com sucesso")
 
 def editar_produto():
-    id_produto = (int(input("Digite o id do prodduto para editar: ")))
+    id_produto = (int(input("Digite o id do produto para editar: ")))
     novo_nome = input("Digite o nome do produto: ")
     nova_descricao = input("Digite a descricao: ")
 
@@ -75,12 +75,76 @@ def limpar_terminal():
     import os
     os.system("cls")
 
+# ==================================================
+
+def consultar_cliente():
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute(
+        "SELECT id, nome, cnpj FROM clientes"
+    )
+    registros = cursor.fetchall()
+    cursor.close()
+    conexao.close()
+
+    print("Clientes: ")
+    for cliente in registros:
+        print(cliente[0], "=>", cliente[1], "=>", cliente[2])
+
+def cadastrar_cliente():
+    nome = input("Digite o nome do cliente: ")
+    cnpj = input("Digite o CNPJ do cliente: ")
+    
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute(
+        "INSERT INTO clientes (nome, cnpj) VALUEs (%s, %s)", (nome, cnpj)
+    )
+    conexao.commit()
+    cursor.close()
+    conexao.close()
+    print("Cliente cadastrado com sucesso")
+
+def apagar_cliente():
+    id_cliente = int(input("Digite o ID do cliente para apagar: "))
+
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute("Delete from clientes WHERE id = %s", (id_cliente,))
+    conexao.commit()
+    cursor.close()
+    conexao.close()
+    print("Cliente apagado com sucesso")
+
+def editar_cliente():
+    id_cliente = int(input("Digite o ID do produto para editar: "))
+    novo_nome = input("Digite o nome do cliente: ")
+    novo_cnpj = input("Digite o CNPJ: ")
+
+    conexao = conectar()
+    cursor = conexao.cursor()
+    cursor.execute(
+        "UPDATE clientes SET nome = %s, cnpj = %s WHERE id = %s",
+        (novo_nome, novo_cnpj, id_cliente)
+    )
+    conexao.commit()
+    cursor.close()
+    conexao.close()
+    print("Produto alterado com sucesso")
+
+
+# ===================================================
+
 if __name__ == "__main__":
     menu = """MENU:
 1   - Consultar produtos
 2   - Cadastrar produtos
 3   - Apagar produtos
 4   - Editar produtos
+5   - Cadastrar cliente
+6   - Apagar cliente
+7   - Editar cliente
+8   - Consultar cliente
 99  - Sair
 
 Digite o menu desejado:"""
@@ -96,6 +160,14 @@ Digite o menu desejado:"""
             apagar_produto()
         elif menu_escolhido == 4:
             editar_produto()
+        elif menu_escolhido == 5:
+            cadastrar_cliente()
+        elif menu_escolhido == 6:
+            apagar_cliente()
+        elif menu_escolhido == 7:
+            editar_cliente()
+        elif menu_escolhido == 8:
+            consultar_cliente()
         else:
             print("Opção inválida")
 

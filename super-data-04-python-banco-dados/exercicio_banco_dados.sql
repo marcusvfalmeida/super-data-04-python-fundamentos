@@ -13,3 +13,20 @@
 # Modificar todas as demais funções de editar e consultar
 # Alterar a tabela de clientes adicionando a coluna de endereço, telefone, email, limite_credito
 # Modificar as funções de cadastro, editar e consultar
+
+USE loja_db;
+
+CREATE TABLE clientes(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(100)
+);
+
+SELECT id, nome from clientes;
+
+INSERT INTO clientes
+(nome)
+VALUES
+("João da Silva"),
+("Maria de Souza");
+
+ALTER TABLE clientes add cnpj VARCHAR(14);
