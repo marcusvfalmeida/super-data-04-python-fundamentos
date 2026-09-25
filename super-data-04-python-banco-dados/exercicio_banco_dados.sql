@@ -16,6 +16,8 @@
 
 USE loja_db;
 
+drop table clientes;
+
 CREATE TABLE clientes(
     id INT PRIMARY KEY AUTO_INCREMENT,
     nome VARCHAR(100)
